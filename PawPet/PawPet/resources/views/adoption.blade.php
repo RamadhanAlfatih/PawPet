@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pet</title>
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 
   <link rel="stylesheet" href="{{ asset('css/adoption.css') }}">
 
@@ -39,7 +39,7 @@
     @endforelse
 
   </div>
-  @include('partials.footer')
+  <!-- @include('partials.footer') -->
 
 </body>
 

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    @include('partials.Navbar')
+    @include('partials.navbarSecond')
     <br><br><br><br><br><br>
     <div class="flex flex-col justify-center items-center">
         {{-- Find your own pet section --}}
