@@ -22,8 +22,8 @@ use App\Models\Pengguna;
 // Route::post('/auth/login', [AuthController::class, 'login']);
 Route::get('/Pet', [HewansController::class, 'showAll'])->name('pet')->middleware('auth');
 Route::get('/Pet/{id}', [HewansController::class, 'show'])->name('DetailProfilHewan')->middleware('auth');
-Route::get('/auth/signUp', [RegisterController::class, 'index'])->name('index')->middleware('auth');
-Route::post('/auth/store', [RegisterController::class, 'store'])->name('store')->middleware('auth');
+Route::get('/auth/signUp', [RegisterController::class, 'index'])->name('index');
+Route::post('/auth/store', [RegisterController::class, 'store'])->name('store');
 
 Route::get('/auth/login', [AuthController::class, 'showLoginForm'])->name('auth.showLogin');
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login'); 

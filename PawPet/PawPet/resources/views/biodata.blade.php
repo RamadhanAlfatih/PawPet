@@ -28,7 +28,7 @@
         <div class="flex flex-col gap-3">
           <h2 class="text-black font-bold m-0 text-[2.25rem]">{{ $pengguna->name }}</h2>
           <div class="flex flex-col gap-3">
-            <p class="text-black text-[1.75rem] font-medium m-0">@keanu_ganteng</p>
+            <p class="text-black text-[1.75rem] font-medium m-0">@ {{ $pengguna->username }}</p>
             <div class="flex flex-row gap-2">
               <p class="text-black text-[1.75rem] font-medium m-0">{{ $pengguna->age }}</p>
               <p class="text-black text-[1.75rem] font-medium m-0">tahun</p>
