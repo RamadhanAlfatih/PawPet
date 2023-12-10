@@ -18,12 +18,12 @@
         <div class="row">
             <div class="col-4 text-center">
                 <img src="{{ asset('img/pet.png') }}" alt="petImage">
-                <a href="/pawpet/public/profilHewan/{{ $hewan->id }}/{{ $hewan->adoptStatus }}">
+                <a href="{{ route('changeStatus', ['id' => $hewan->id, 'adoptStatus' => $hewan->adoptStatus]) }}">
                     <button class="btn-adopsi">{{ $hewan->adoptStatus }}</button>
                 </a>
             </div>
             <div class="col-6">
-                <form class="row g-3 d-flex" method="post" action="/pawpet/public/editProfilHewan">
+                <form class="row g-3 d-flex" method="post" action="{{route('editProfilHewan')}}">
                     @csrf
                     <div class="col-12 mt-5"></div>
                     <div class="col-12 mt-4">

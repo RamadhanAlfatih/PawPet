@@ -30,7 +30,7 @@
         <p>Gender : {{ $hewan->gender }}</p>
       </div>
 
-      <a href="/pawpet/public/profilHewan/{{ $hewan->id }}">
+      <a href="{{ route('showHewan', ['id' => $hewan->id]) }}">
         <button class="small-button" id="lihatButton">Lihat</button>
       </a>
     </div>

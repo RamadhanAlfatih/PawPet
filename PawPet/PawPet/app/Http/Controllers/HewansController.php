@@ -11,15 +11,26 @@ use Illuminate\Support\Facades\Session;
 
 class HewansController extends Controller
 {
-    public function showAll() {
-        $hewans = Hewan::all();
+    public function showAll(Request $request) {
+        $searchValue = $request->input('search');
+
+        if ($searchValue) {
+            $hewans = Hewan::where('name', 'like', '%' . $searchValue . '%')
+                ->orWhere('type', 'like', '%' . $searchValue . '%')
+                ->orWhere('race', 'like', '%' . $searchValue . '%')
+                ->orWhere('gender', 'like', '%' . $searchValue . '%')
+                ->get();
+        } else {
+            $hewans = Hewan::all();
+        }
 
         return view('Pet')
             ->with('hewans', $hewans)
             ->with('title', 'Pet');
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $hewan = Hewan::find($id);
         $pengguna = $hewan->pengguna;
 
@@ -29,17 +40,20 @@ class HewansController extends Controller
         ]);
     }
 
-    public function showPet() {
+    public function showPet()
+    {
         $hewans = Hewan::all();
         return view('adoption')->with('hewans', $hewans);
     }
 
-    public function showDetail($id) {
+    public function showDetail($id)
+    {
         $hewans = Hewan::find($id);
         return view('profilHewan')->with('hewan', $hewans);
     }
 
-    public function changeStatus($id, $changeStatus) {
+    public function changeStatus($id, $changeStatus)
+    {
         $hewan = Hewan::where('id', $id)->first();
         $status = '';
 
@@ -56,7 +70,8 @@ class HewansController extends Controller
         return view('profilHewan')->with('hewan', $hewan);
     }
 
-    public function showEdit(Request $request) {
+    public function showEdit(Request $request)
+    {
         $action = $request->input('action');
         $hewanId = $request->input('id');
 
@@ -65,22 +80,21 @@ class HewansController extends Controller
             $hewan->delete();
 
             $hewans = Hewan::all();
-            return view('pet')->with('hewans', $hewans);
-            
+            return view('adoption')->with('hewans', $hewans);
         } elseif ($action === 'edit') {
             $hewan = Hewan::where('id', $hewanId)->first();
             return view('editProfilHewan')->with('hewan', $hewan);
         }
     }
 
-    public function showChange(Request $request) {
+    public function showChange(Request $request)
+    {
         $action = $request->input('action');
         $id = $request->input('id');
 
         if ($action === 'kembali') {
             $hewan = Hewan::where('id', $id)->first();
             return view('profilHewan')->with('hewan', $hewan);
-            
         } elseif ($action === 'simpan') {
             $name = $request->input('name');
             $type = $request->input('type');
@@ -102,8 +116,9 @@ class HewansController extends Controller
         }
     }
 
-    public function index() {
-        return view('addPet'); 
+    public function index()
+    {
+        return view('addPet');
     }
 
     public function add(Request $request)
@@ -114,8 +129,8 @@ class HewansController extends Controller
             'petRas' => 'required|string',
             'petUmur' => 'required|numeric|min:1',
             'petGender' => 'required|string',
-           'petRiwayat' => 'required|string',
-            'petPhoto' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'petRiwayat' => 'required|string',
+            'petPhoto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('petPhoto')) {
@@ -132,11 +147,11 @@ class HewansController extends Controller
             'age' => $validatedData['petUmur'],
             'gender' => $validatedData['petGender'],
             'health' => $validatedData['petRiwayat'],
-            'adoptStatus' => 'Tersedia untuk Adopsi', 
-            'photo' => 'photo', 
-            'username' => auth()->user()->username, 
+            'adoptStatus' => 'Tersedia untuk Adopsi',
+            'photo' => 'photo',
+            'username' => auth()->user()->username,
         ]);
 
         return redirect('/adoption');
-    } 
+    }
 }

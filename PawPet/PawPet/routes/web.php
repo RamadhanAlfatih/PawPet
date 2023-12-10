@@ -36,16 +36,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/tambahProfilHewan', [HewansController::class, 'addPet'])->middleware('auth');
 
-Route::get('/profilHewan/{id}/{adoptStatus}', [HewansController::class, 'changeStatus'])->middleware('auth');
-Route::get('/profilHewan/{id}', [HewansController::class, 'showDetail'])->middleware('auth');
-Route::post('/profilHewan', [HewansController::class, 'showChange'])->middleware('auth');
-
 Route::get('/profil', [PenggunaController::class, 'showBiodata'])->name('profil')->middleware('auth');
 Route::get('/editProfil', [PenggunaController::class, 'showEditBiodata'])->name('editProfil')->middleware('auth');
 Route::put('/updateProfil', [PenggunaController::class, 'updateBiodata'])->name('updateProfil')->middleware('auth');
 Route::get('/editProfil/cancel', [PenggunaController::class, 'cancelEdit'])->name('cancelEdit')->middleware('auth');
 
-Route::post('/editProfilHewan', [HewansController::class, 'showEdit'])->middleware('auth');
+
+Route::post('/editProfilHewan', [HewansController::class, 'showEdit'])->name('editProfilHewan')->middleware('auth');
 
 Route::get('/addPet', [HewansController::class, 'index'])->name('addPet')->middleware('auth');
 Route::post('/add', [HewansController::class, 'add'])->name('add')->middleware('auth');
+
+Route::get('/profilHewan/{id}/{adoptStatus}', [HewansController::class, 'changeStatus'])->name('changeStatus')->middleware('auth');
+Route::get('/profilHewan/{id}', [HewansController::class, 'showDetail'])->name('showHewan')->middleware('auth');
+Route::post('/profilHewan', [HewansController::class, 'showChange'])->name('showChange')->middleware('auth');

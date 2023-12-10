@@ -26,7 +26,7 @@
                     </button>
                 </div>
                 <div class="col-12">
-                    <form class="row g-3 d-flex"  method="post" action="/pawpet/public/profilHewan">
+                    <form class="row g-3 d-flex"  method="post" action="{{ route('showChange') }}">
                         @csrf
                         <div class="col-12 mt-4">
                             <input type="hidden" name="id" value="{{ $hewan->id }}">
